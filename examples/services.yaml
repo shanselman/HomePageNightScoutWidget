@@ -1,0 +1,25 @@
+- Health:
+    - Nightscout:
+        description: Glucose at a glance
+        # Optional: add your own token-free Nightscout href.
+        widget:
+          type: customapi
+          url: http://nightscout-widget:3001/api/homepage
+          refreshInterval: 30000
+          # If WIDGET_API_KEY is configured on the adapter, set the same value
+          # as HOMEPAGE_VAR_NIGHTSCOUT_WIDGET_KEY in Homepage's environment:
+          # headers:
+          #   Authorization: "Bearer {{HOMEPAGE_VAR_NIGHTSCOUT_WIDGET_KEY}}"
+          mappings:
+            - field: glucose
+              label: Glucose
+              format: text
+            - field: trend
+              label: Trend / change
+              format: text
+            - field: age
+              label: Updated
+              format: text
+            - field: status
+              label: Status
+              format: text

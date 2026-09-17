@@ -1,0 +1,19 @@
+services:
+  nightscout-widget:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3001
+    read_only: true
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - homepage
+
+networks:
+  homepage:
+    external: true
+    name: ${HOMEPAGE_NETWORK:-homepage_default}
