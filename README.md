@@ -32,7 +32,8 @@ Homepage browser -> Homepage server -> this adapter -> Nightscout API v1
 
 Homepage does not currently support installing external native widgets.
 This project uses `type: customapi`, **not** `type: nightscout`. It works with
-stock Homepage; the reference integration targets Homepage **v2.4.0**.
+stock Homepage. The container and browser flow have been verified with
+Homepage **v2.3.0**, and the component/proxy integration suite targets **v2.4.0**.
 
 Features:
 
@@ -310,6 +311,11 @@ this is not a browser end-to-end test or a Docker deployment test.
 
 The upstream checkout and its dependencies stay in the ignored `.local`
 directory, separate from this dependency-free adapter.
+
+The Docker deployment has also been exercised with stock Homepage v2.3.0:
+shared-network connectivity, adapter authentication, the real Homepage proxy,
+four rendered fields, and automatic 30-second refresh were verified in a
+browser. No private configuration, readings, or screenshots are included here.
 
 ### Optional live smoke test
 
