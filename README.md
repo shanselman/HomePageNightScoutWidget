@@ -1,8 +1,24 @@
-# Nightscout for Homepage
+# Homepage Nightscout Widget: Blood Glucose and CGM Dashboard
 
-Your latest sensor glucose, trend, change, and reading age on
-[Homepage](https://gethomepage.dev/), using its **built-in Custom API widget**.
-No Homepage fork, custom build, or browser-side Nightscout credentials.
+Display your **Nightscout blood sugar (blood glucose) readings on the
+[Homepage dashboard](https://gethomepage.dev/)**. This free, open-source
+Nightscout integration brings continuous glucose monitoring (CGM) data to your
+self-hosted homelab dashboard using Homepage's **built-in Custom API widget**
+(`customapi`).
+
+Show the latest sensor glucose, trend arrow, change, and reading age in mg/dL
+or mmol/L. Run the small adapter with **Docker Compose or Node.js**, connect
+your existing [Nightscout](https://nightscout.github.io/) server, and add the
+provided `services.yaml` configuration. No Homepage fork, custom build, or
+browser-side Nightscout credentials.
+
+This project is for **[gethomepage/homepage](https://github.com/gethomepage/homepage)**
+at **gethomepage.dev**, not a browser start-page extension or Home Assistant card.
+
+**Setup:** [Docker Compose](#docker-alongside-an-existing-homepage) |
+[Node.js](#quick-start-nodejs) |
+[Homepage widget configuration](#add-the-homepage-service) |
+[Compatibility FAQ](#nightscout-and-homepage-faq)
 
 **Synthetic example, not a real reading:**
 
@@ -48,6 +64,35 @@ Features:
 This is a service-card widget, not a header widget. It has no graph, adaptive
 glucose-range colors, or dosing/pump features. Those are deliberately outside
 this small adapter's scope.
+
+## Nightscout and Homepage FAQ
+
+### How do I show blood sugar readings on my Homepage dashboard?
+
+Run this Nightscout adapter, set `NIGHTSCOUT_URL` and any required read-only
+token, then add the [Homepage Custom API configuration](#add-the-homepage-service)
+to `services.yaml`. The widget displays glucose, trend/change, last-reading age,
+and a current/stale status. A complete
+[Docker Compose setup](#docker-alongside-an-existing-homepage) is included.
+
+### Do I need a native Nightscout widget or a custom Homepage build?
+
+No. This is an unofficial **Homepage Nightscout widget** built on the existing
+`type: customapi` integration. It works with stock Homepage without installing
+a plugin or changing Homepage's source code.
+
+### Does this connect directly to Dexcom or FreeStyle Libre?
+
+No. Your CGM readings must already be available from a compatible Nightscout
+server. The adapter reads the **Nightscout API v1**, not Dexcom Share,
+LibreLinkUp, a manufacturer's cloud account, or CGM hardware directly.
+It does not collect your CGM account credentials.
+
+### Can the widget display mmol/L instead of mg/dL?
+
+Yes. Set `NIGHTSCOUT_UNITS=mmol/L` to display glucose and changes in mmol/L.
+The default is mg/dL. See [configuration](#configuration) for all options,
+including polling and stale-reading thresholds.
 
 ## Quick start: Node.js
 
